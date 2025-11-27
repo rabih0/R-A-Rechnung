@@ -30,8 +30,20 @@ const Dashboard = () => {
     }
   }
 
+  const getColorClasses = (color) => {
+    const colors = {
+      blue: 'bg-gradient-to-br from-blue-50 to-blue-100 border-l-4 border-blue-500',
+      green: 'bg-gradient-to-br from-green-50 to-green-100 border-l-4 border-green-500',
+      yellow: 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-l-4 border-yellow-500',
+      red: 'bg-gradient-to-br from-red-50 to-red-100 border-l-4 border-red-500',
+      purple: 'bg-gradient-to-br from-purple-50 to-purple-100 border-l-4 border-purple-500',
+      indigo: 'bg-gradient-to-br from-indigo-50 to-indigo-100 border-l-4 border-indigo-500',
+    }
+    return colors[color] || colors.blue
+  }
+
   const StatCard = ({ label, value, icon, color }) => (
-    <div className={`card bg-gradient-to-br from-${color}-50 to-${color}-100 border-l-4 border-${color}-500`}>
+    <div className={`card ${getColorClasses(color)}`}>
       <div className="flex items-center justify-between">
         <div>
           <p className="text-gray-600 text-sm font-semibold">{label}</p>

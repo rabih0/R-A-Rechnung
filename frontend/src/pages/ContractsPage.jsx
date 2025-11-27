@@ -92,6 +92,17 @@ const ContractsPage = () => {
     }))
   }
 
+  const getStatusBadgeClass = (status) => {
+    const statusClasses = {
+      draft: 'bg-gray-100 text-gray-800',
+      pending: 'bg-yellow-100 text-yellow-800',
+      confirmed: 'bg-blue-100 text-blue-800',
+      completed: 'bg-green-100 text-green-800',
+      cancelled: 'bg-red-100 text-red-800',
+    }
+    return statusClasses[status] || statusClasses.draft
+  }
+
   const calculatePrice = async () => {
     if (!formData.customer_id) {
       toast.error('Bitte wählen Sie einen Kunden aus')
@@ -148,7 +159,7 @@ const ContractsPage = () => {
                     <td>{contract.customer?.first_name} {contract.customer?.last_name}</td>
                     <td>{contract.from_address} → {contract.to_address}</td>
                     <td>€{contract.total_price?.toFixed(2) || '0.00'}</td>
-                    <td><span className={`badge badge-${contract.status}`}>{contract.status}</span></td>
+                    <td><span className={`badge px-2 py-1 text-xs font-semibold rounded ${getStatusBadgeClass(contract.status)}`}>{contract.status}</span></td>
                     <td>
                       <button className="text-blue-600 hover:underline mr-4">Ansicht</button>
                       <button

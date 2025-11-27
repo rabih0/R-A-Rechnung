@@ -8,12 +8,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f3f4f6;
 }
 
 code {
@@ -21,60 +26,82 @@ code {
     monospace;
 }
 
+/* Layout */
 .container {
   @apply max-w-7xl mx-auto px-4;
 }
 
+/* Buttons */
 .btn-primary {
-  @apply px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition;
+  @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 font-medium;
 }
 
 .btn-secondary {
-  @apply px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition;
+  @apply px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition duration-200 font-medium;
 }
 
 .btn-danger {
-  @apply px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition;
+  @apply px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200 font-medium;
 }
 
+.btn-small {
+  @apply px-3 py-1 text-sm rounded-lg transition duration-200 font-medium;
+}
+
+/* Cards */
 .card {
-  @apply bg-white rounded-lg shadow-md p-4;
+  @apply bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition duration-200;
 }
 
+/* Forms */
 .form-input {
-  @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200;
+}
+
+.form-input:placeholder {
+  @apply text-gray-400;
 }
 
 .form-select {
-  @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-white cursor-pointer;
 }
 
+.form-textarea {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 resize-none;
+}
+
+/* Tables */
 .table-container {
   @apply overflow-x-auto;
 }
 
 .table {
-  @apply w-full text-left;
+  @apply w-full text-left text-sm;
+}
+
+.table thead {
+  @apply bg-gray-100 border-b-2 border-gray-200;
 }
 
 .table th {
-  @apply bg-gray-100 px-4 py-3 font-semibold text-gray-700;
+  @apply px-4 py-3 font-semibold text-gray-700 whitespace-nowrap;
 }
 
 .table td {
-  @apply px-4 py-3 border-b;
+  @apply px-4 py-3 border-b border-gray-100;
 }
 
-.table tr:hover {
-  @apply bg-gray-50;
+.table tbody tr {
+  @apply hover:bg-gray-50 transition duration-150;
 }
 
-.loader {
-  @apply inline-block animate-spin;
+.table tbody tr:last-child td {
+  @apply border-b-0;
 }
 
+/* Badges */
 .badge {
-  @apply inline-block px-2 py-1 text-xs font-semibold rounded-full;
+  @apply inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap;
 }
 
 .badge-primary {
@@ -91,4 +118,82 @@ code {
 
 .badge-danger {
   @apply bg-red-100 text-red-800;
+}
+
+.badge-info {
+  @apply bg-cyan-100 text-cyan-800;
+}
+
+/* Utilities */
+.loader {
+  @apply inline-block animate-spin;
+}
+
+.fade-in {
+  @apply animate-fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modal {
+  @apply bg-white rounded-lg shadow-xl;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded hover:bg-gray-400;
+}
+
+/* Status Colors */
+.status-draft {
+  @apply text-gray-600 bg-gray-100;
+}
+
+.status-pending {
+  @apply text-yellow-600 bg-yellow-100;
+}
+
+.status-confirmed {
+  @apply text-blue-600 bg-blue-100;
+}
+
+.status-completed {
+  @apply text-green-600 bg-green-100;
+}
+
+.status-cancelled {
+  @apply text-red-600 bg-red-100;
+}
+
+/* Responsive Utilities */
+@media (max-width: 640px) {
+  .hide-mobile {
+    @apply hidden;
+  }
+}
+
+@media (min-width: 641px) {
+  .show-mobile {
+    @apply hidden;
+  }
 }

@@ -115,21 +115,15 @@ const InvoicesPage = () => {
 
   const totals = calculateTotal()
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'draft':
-        return 'gray'
-      case 'sent':
-        return 'blue'
-      case 'paid':
-        return 'green'
-      case 'overdue':
-        return 'red'
-      case 'cancelled':
-        return 'red'
-      default:
-        return 'gray'
+  const getStatusBadgeClass = (status) => {
+    const statusClasses = {
+      draft: 'bg-gray-100 text-gray-800',
+      sent: 'bg-blue-100 text-blue-800',
+      paid: 'bg-green-100 text-green-800',
+      overdue: 'bg-red-100 text-red-800',
+      cancelled: 'bg-red-100 text-red-800',
     }
+    return statusClasses[status] || statusClasses.draft
   }
 
   return (
@@ -165,7 +159,7 @@ const InvoicesPage = () => {
                     <td>{invoice.invoice_number}</td>
                     <td>{invoice.customer?.first_name} {invoice.customer?.last_name}</td>
                     <td>€{invoice.total?.toFixed(2)}</td>
-                    <td><span className={`badge badge-${getStatusColor(invoice.status)}`}>{invoice.status}</span></td>
+                    <td><span className={`badge ${getStatusBadgeClass(invoice.status)}`}>{invoice.status}</span></td>
                     <td>
                       <button className="text-blue-600 hover:underline mr-4">Ansicht</button>
                       <button

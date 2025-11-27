@@ -102,19 +102,14 @@ const AppointmentsPage = () => {
     setSelectedDate(date)
   }
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'scheduled':
-        return 'blue'
-      case 'in_progress':
-        return 'yellow'
-      case 'completed':
-        return 'green'
-      case 'cancelled':
-        return 'red'
-      default:
-        return 'gray'
+  const getStatusBadgeClass = (status) => {
+    const statusClasses = {
+      scheduled: 'bg-blue-100 text-blue-800',
+      in_progress: 'bg-yellow-100 text-yellow-800',
+      completed: 'bg-green-100 text-green-800',
+      cancelled: 'bg-red-100 text-red-800',
     }
+    return statusClasses[status] || statusClasses.scheduled
   }
 
   return (
@@ -150,7 +145,7 @@ const AppointmentsPage = () => {
                             {appointment.customer?.first_name} {appointment.customer?.last_name}
                           </p>
                         </div>
-                        <span className={`badge badge-${getStatusColor(appointment.status)}`}>
+                        <span className={`badge px-2 py-1 text-xs font-semibold rounded ${getStatusBadgeClass(appointment.status)}`}>
                           {appointment.status}
                         </span>
                       </div>
