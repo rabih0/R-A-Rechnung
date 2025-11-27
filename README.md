@@ -294,3 +294,4 @@ Für Probleme oder Fragen bitte ein Issue erstellen oder den Support kontaktiere
 
 **Version**: 1.0.0  
 **Letztes Update**: November 2024
+# R-A-Rechnung
