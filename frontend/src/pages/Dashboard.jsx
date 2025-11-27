@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { settingsAPI } from '../services/api'
+import StatCard from '../components/StatCard'
 import toast from 'react-hot-toast'
 
 const Dashboard = () => {
@@ -30,29 +31,7 @@ const Dashboard = () => {
     }
   }
 
-  const getColorClasses = (color) => {
-    const colors = {
-      blue: 'bg-gradient-to-br from-blue-50 to-blue-100 border-l-4 border-blue-500',
-      green: 'bg-gradient-to-br from-green-50 to-green-100 border-l-4 border-green-500',
-      yellow: 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-l-4 border-yellow-500',
-      red: 'bg-gradient-to-br from-red-50 to-red-100 border-l-4 border-red-500',
-      purple: 'bg-gradient-to-br from-purple-50 to-purple-100 border-l-4 border-purple-500',
-      indigo: 'bg-gradient-to-br from-indigo-50 to-indigo-100 border-l-4 border-indigo-500',
-    }
-    return colors[color] || colors.blue
-  }
 
-  const StatCard = ({ label, value, icon, color }) => (
-    <div className={`card ${getColorClasses(color)}`}>
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-gray-600 text-sm font-semibold">{label}</p>
-          <p className="text-3xl font-bold text-gray-800 mt-2">{value}</p>
-        </div>
-        <div className="text-4xl">{icon}</div>
-      </div>
-    </div>
-  )
 
   if (isLoading) {
     return (
@@ -73,61 +52,63 @@ const Dashboard = () => {
           label="Gesamtkunden"
           value={stats.total_customers}
           icon="👥"
-          color="blue"
         />
         <StatCard
           label="Verträge"
           value={stats.total_contracts}
           icon="📄"
-          color="green"
         />
         <StatCard
           label="Rechnungen"
           value={stats.total_invoices}
           icon="💰"
-          color="yellow"
         />
         <StatCard
           label="Ausstehende Rechnungen"
           value={stats.pending_invoices}
           icon="⏰"
-          color="red"
+          trend="up"
+          trendText="Zu beachten"
         />
         <StatCard
           label="Kommende Termine"
           value={stats.upcoming_appointments}
           icon="📅"
-          color="purple"
         />
         <StatCard
           label="Abgeschlossene Verträge"
           value={stats.completed_contracts}
           icon="✅"
-          color="indigo"
+          trend="up"
+          trendText="Gut"
         />
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-bold mb-4 text-gray-800">
-          Willkommen im Umzugsmanagement System
+      <div className="card">
+        <h2 className="text-2xl font-bold mb-2 text-gray-800">
+          Willkommen im Umzugsmanagement System 👋
         </h2>
-        <p className="text-gray-600 mb-4">
+        <p className="text-gray-600 mb-6">
           Verwalten Sie Ihre Umzüge, Kunden, Verträge und Rechnungen effizient
           mit diesem integrierten System.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-blue-50 p-4 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
             <h3 className="font-semibold text-blue-900 mb-2">🎯 Schnelle Navigation</h3>
             <p className="text-sm text-blue-700">
-              Nutzen Sie das Seitenmenü, um auf Kunden, Verträge, Rechnungen und
-              Termine zuzugreifen.
+              Nutzen Sie das Seitenmenü zum Zugriff auf alle wichtigen Module und Funktionen.
             </p>
           </div>
-          <div className="bg-green-50 p-4 rounded-lg">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
             <h3 className="font-semibold text-green-900 mb-2">⚙️ Einstellungen</h3>
             <p className="text-sm text-green-700">
-              Passen Sie Preisebenen, Gebühren und Unternehmensdetails in den
-              Einstellungen an.
+              Passen Sie Preise, Gebühren und Unternehmensdetails flexibel an.
+            </p>
+          </div>
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
+            <h3 className="font-semibold text-purple-900 mb-2">📊 Echtzeitdaten</h3>
+            <p className="text-sm text-purple-700">
+              Alle Informationen werden live aktualisiert und sind jederzeit verfügbar.
             </p>
           </div>
         </div>
