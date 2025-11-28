@@ -26,7 +26,7 @@ const InvoicesPage = () => {
       const response = await invoiceAPI.getAll({ per_page: 50 })
       setInvoices(response.data.data)
     } catch (error) {
-      toast.error('Fehler beim Laden der Rechnungen')
+      toast.error('خطأ في تحميل الفواتير')
     } finally {
       setIsLoading(false)
     }
@@ -46,7 +46,7 @@ const InvoicesPage = () => {
 
     try {
       await invoiceAPI.create(formData)
-      toast.success('Rechnung erstellt')
+      toast.success('تم إنشاء الفاتورة')
       setShowModal(false)
       setFormData({
         customer_id: '',
@@ -57,18 +57,18 @@ const InvoicesPage = () => {
       })
       fetchInvoices()
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Fehler beim Erstellen')
+      toast.error(error.response?.data?.message || 'خطأ في الإنشاء')
     }
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Möchten Sie diese Rechnung wirklich löschen?')) {
+    if (window.confirm('هل أنت متأكد أنك تريد حذف هذه الفاتورة؟')) {
       try {
         await invoiceAPI.delete(id)
-        toast.success('Rechnung gelöscht')
+        toast.success('تم حذف الفاتورة')
         fetchInvoices()
       } catch (error) {
-        toast.error('Fehler beim Löschen')
+        toast.error('خطأ في الحذف')
       }
     }
   }
@@ -129,28 +129,28 @@ const InvoicesPage = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Rechnungen</h1>
+        <h1 className="text-3xl font-bold text-gray-800">الفواتير</h1>
         <button
           onClick={() => setShowModal(true)}
           className="btn-primary"
         >
-          + Neue Rechnung
+          + فاتورة جديدة
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Wird geladen...</div>
+        <div className="text-center py-8">جاري التحميل...</div>
       ) : (
         <div className="card">
           <div className="table-container">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Rechnungsnummer</th>
-                  <th>Kunde</th>
-                  <th>Gesamtbetrag</th>
-                  <th>Status</th>
-                  <th>Aktionen</th>
+                  <th>رقم الفاتورة</th>
+                  <th>العميل</th>
+                  <th>المبلغ الإجمالي</th>
+                  <th>الحالة</th>
+                  <th>الإجراءات</th>
                 </tr>
               </thead>
               <tbody>
@@ -161,12 +161,12 @@ const InvoicesPage = () => {
                     <td>€{invoice.total?.toFixed(2)}</td>
                     <td><span className={`badge ${getStatusBadgeClass(invoice.status)}`}>{invoice.status}</span></td>
                     <td>
-                      <button className="text-blue-600 hover:underline mr-4">Ansicht</button>
+                      <button className="text-blue-600 hover:underline mr-4">عرض</button>
                       <button
                         onClick={() => handleDelete(invoice.id)}
                         className="text-red-600 hover:underline"
                       >
-                        Löschen
+                        حذف
                       </button>
                     </td>
                   </tr>
@@ -180,12 +180,12 @@ const InvoicesPage = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl my-8">
-            <h2 className="text-2xl font-bold mb-6">Neue Rechnung</h2>
+            <h2 className="text-2xl font-bold mb-6">فاتورة جديدة</h2>
 
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Kunde</label>
+                  <label className="block text-sm font-bold mb-2">العميل</label>
                   <select
                     name="customer_id"
                     value={formData.customer_id}
@@ -193,7 +193,7 @@ const InvoicesPage = () => {
                     className="form-select"
                     required
                   >
-                    <option value="">Wählen Sie einen Kunden</option>
+                    <option value="">اختر عميلاً</option>
                     {customers.map((customer) => (
                       <option key={customer.id} value={customer.id}>
                         {customer.first_name} {customer.last_name}
@@ -206,7 +206,7 @@ const InvoicesPage = () => {
 
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Rechnungsdatum</label>
+                  <label className="block text-sm font-bold mb-2">تاريخ الفاتورة</label>
                   <input
                     type="date"
                     name="invoice_date"
@@ -217,7 +217,7 @@ const InvoicesPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Fälligkeitsdatum</label>
+                  <label className="block text-sm font-bold mb-2">تاريخ الاستحقاق</label>
                   <input
                     type="date"
                     name="due_date"
@@ -229,14 +229,14 @@ const InvoicesPage = () => {
                 </div>
               </div>
 
-              <h3 className="text-lg font-bold mb-4">Rechnungspositionen</h3>
+              <h3 className="text-lg font-bold mb-4">بنود الفاتورة</h3>
 
               <div className="space-y-2 mb-4">
                 {formData.items.map((item, index) => (
                   <div key={index} className="grid grid-cols-4 gap-2">
                     <input
                       type="text"
-                      placeholder="Beschreibung"
+                      placeholder="الوصف"
                       value={item.description}
                       onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                       className="form-input"
@@ -244,7 +244,7 @@ const InvoicesPage = () => {
                     />
                     <input
                       type="number"
-                      placeholder="Menge"
+                      placeholder="الكمية"
                       value={item.quantity}
                       onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
                       className="form-input"
@@ -253,7 +253,7 @@ const InvoicesPage = () => {
                     />
                     <input
                       type="number"
-                      placeholder="Preis"
+                      placeholder="السعر"
                       value={item.unit_price}
                       onChange={(e) => handleItemChange(index, 'unit_price', e.target.value)}
                       className="form-input"
@@ -266,7 +266,7 @@ const InvoicesPage = () => {
                       onClick={() => removeItem(index)}
                       className="text-red-600 hover:underline"
                     >
-                      Entfernen
+                      إزالة
                     </button>
                   </div>
                 ))}
@@ -277,20 +277,20 @@ const InvoicesPage = () => {
                 onClick={addItem}
                 className="mb-4 btn-secondary"
               >
-                + Position hinzufügen
+                + إضافة بند
               </button>
 
               <div className="bg-gray-50 p-4 rounded mb-4">
                 <div className="flex justify-between mb-2">
-                  <span>Zwischensumme:</span>
+                  <span>المجموع الفرعي:</span>
                   <span>€{totals.subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span>Steuern (19%):</span>
+                  <span>الضرائب (19%):</span>
                   <span>€{totals.tax.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between font-bold text-lg">
-                  <span>Gesamtbetrag:</span>
+                  <span>المبلغ الإجمالي:</span>
                   <span>€{totals.total.toFixed(2)}</span>
                 </div>
               </div>
@@ -300,14 +300,14 @@ const InvoicesPage = () => {
                   type="submit"
                   className="flex-1 btn-primary"
                 >
-                  Rechnung erstellen
+                  إنشاء الفاتورة
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
                   className="flex-1 btn-secondary"
                 >
-                  Abbrechen
+                  إلغاء
                 </button>
               </div>
             </form>

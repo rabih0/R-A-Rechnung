@@ -28,10 +28,10 @@ const LoginPage = () => {
     const success = await login(formData.email, formData.password)
 
     if (success) {
-      toast.success('Erfolgreich angemeldet!')
+      toast.success('تم تسجيل الدخول بنجاح!')
       navigate('/')
     } else {
-      toast.error(error || 'Anmeldevorgang fehlgeschlagen')
+      toast.error(error || 'فشل تسجيل الدخول')
     }
   }
 
@@ -39,13 +39,13 @@ const LoginPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800">
       <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Umzugsmanagement
+          نظام إدارة النقل
         </h1>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              E-Mail
+              البريد الإلكتروني
             </label>
             <input
               type="email"
@@ -53,14 +53,14 @@ const LoginPage = () => {
               value={formData.email}
               onChange={handleChange}
               className="form-input"
-              placeholder="beispiel@email.com"
+              placeholder="example@email.com"
               required
             />
           </div>
 
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Passwort
+              كلمة المرور
             </label>
             <input
               type="password"
@@ -84,14 +84,14 @@ const LoginPage = () => {
             disabled={isLoading}
             className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {isLoading ? 'Wird angemeldet...' : 'Anmelden'}
+            {isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
           </button>
         </form>
 
         <p className="text-center text-gray-600 mt-4">
-          Noch kein Konto?{' '}
+          ليس لديك حساب؟{' '}
           <Link to="/register" className="text-blue-600 hover:underline">
-            Registrieren
+            تسجيل جديد
           </Link>
         </p>
       </div>

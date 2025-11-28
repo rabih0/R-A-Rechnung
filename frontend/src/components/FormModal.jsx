@@ -7,8 +7,8 @@ const FormModal = ({
   onClose,
   onSubmit,
   children,
-  submitButtonText = 'Speichern',
-  cancelButtonText = 'Abbrechen',
+  submitButtonText = 'حفظ',
+  cancelButtonText = 'إلغاء',
   isLoading = false,
 }) => {
   if (!isOpen) return null
@@ -35,7 +35,7 @@ const FormModal = ({
               disabled={isLoading}
               className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Wird gespeichert...' : submitButtonText}
+              {isLoading ? 'جاري الحفظ...' : submitButtonText}
             </button>
             <button
               type="button"

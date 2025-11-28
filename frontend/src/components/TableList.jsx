@@ -25,7 +25,7 @@ const TableList = ({
             ></path>
           </svg>
         </div>
-        <p className="text-gray-600 mt-4">Wird geladen...</p>
+        <p className="text-gray-600 mt-4">جاري التحميل...</p>
       </div>
     )
   }

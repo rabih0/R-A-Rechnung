@@ -30,7 +30,7 @@ const CustomersPage = () => {
       const response = await customerAPI.getAll({ search, per_page: 50 })
       setCustomers(response.data.data)
     } catch (error) {
-      toast.error('Fehler beim Laden der Kunden')
+      toast.error('خطأ في تحميل العملاء')
       console.error('Error fetching customers:', error)
     } finally {
       setIsLoading(false)
@@ -43,10 +43,10 @@ const CustomersPage = () => {
     try {
       if (editingId) {
         await customerAPI.update(editingId, formData)
-        toast.success('Kunde aktualisiert')
+        toast.success('تم تحديث العميل')
       } else {
         await customerAPI.create(formData)
-        toast.success('Kunde erstellt')
+        toast.success('تم إنشاء العميل')
       }
 
       setShowModal(false)
@@ -64,18 +64,18 @@ const CustomersPage = () => {
       })
       fetchCustomers()
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Fehler beim Speichern')
+      toast.error(error.response?.data?.message || 'خطأ في الحفظ')
     }
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Möchten Sie diesen Kunden wirklich löschen?')) {
+    if (window.confirm('هل أنت متأكد أنك تريد حذف هذا العميل؟')) {
       try {
         await customerAPI.delete(id)
-        toast.success('Kunde gelöscht')
+        toast.success('تم حذف العميل')
         fetchCustomers()
       } catch (error) {
-        toast.error('Fehler beim Löschen')
+        toast.error('خطأ في الحذف')
       }
     }
   }
@@ -113,19 +113,19 @@ const CustomersPage = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Kunden</h1>
+        <h1 className="text-3xl font-bold text-gray-800">العملاء</h1>
         <button
           onClick={() => setShowModal(true)}
           className="btn-primary"
         >
-          + Neuer Kunde
+          + عميل جديد
         </button>
       </div>
 
       <div className="mb-6">
         <input
           type="text"
-          placeholder="Kunden durchsuchen..."
+          placeholder="بحث عن عملاء..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="form-input"
@@ -133,18 +133,18 @@ const CustomersPage = () => {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Wird geladen...</div>
+        <div className="text-center py-8">جاري التحميل...</div>
       ) : (
         <div className="card">
           <div className="table-container">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>E-Mail</th>
-                  <th>Telefon</th>
-                  <th>Stadt</th>
-                  <th>Aktionen</th>
+                  <th>الاسم</th>
+                  <th>البريد الإلكتروني</th>
+                  <th>الهاتف</th>
+                  <th>المدينة</th>
+                  <th>الإجراءات</th>
                 </tr>
               </thead>
               <tbody>
@@ -157,15 +157,15 @@ const CustomersPage = () => {
                     <td>
                       <button
                         onClick={() => handleEdit(customer)}
-                        className="text-blue-600 hover:underline mr-4"
+                        className="text-blue-600 hover:underline ml-4"
                       >
-                        Bearbeiten
+                        تعديل
                       </button>
                       <button
                         onClick={() => handleDelete(customer.id)}
                         className="text-red-600 hover:underline"
                       >
-                        Löschen
+                        حذف
                       </button>
                     </td>
                   </tr>
@@ -180,13 +180,13 @@ const CustomersPage = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
             <h2 className="text-2xl font-bold mb-6">
-              {editingId ? 'Kunde bearbeiten' : 'Neuer Kunde'}
+              {editingId ? 'تعديل العميل' : 'عميل جديد'}
             </h2>
 
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Vorname</label>
+                  <label className="block text-sm font-bold mb-2">الاسم الأول</label>
                   <input
                     type="text"
                     name="first_name"
@@ -197,7 +197,7 @@ const CustomersPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Nachname</label>
+                  <label className="block text-sm font-bold mb-2">اسم العائلة</label>
                   <input
                     type="text"
                     name="last_name"
@@ -210,7 +210,7 @@ const CustomersPage = () => {
               </div>
 
               <div className="mt-4">
-                <label className="block text-sm font-bold mb-2">E-Mail</label>
+                <label className="block text-sm font-bold mb-2">البريد الإلكتروني</label>
                 <input
                   type="email"
                   name="email"
@@ -222,7 +222,7 @@ const CustomersPage = () => {
               </div>
 
               <div className="mt-4">
-                <label className="block text-sm font-bold mb-2">Telefon</label>
+                <label className="block text-sm font-bold mb-2">الهاتف</label>
                 <input
                   type="tel"
                   name="phone"
@@ -234,7 +234,7 @@ const CustomersPage = () => {
               </div>
 
               <div className="mt-4">
-                <label className="block text-sm font-bold mb-2">Adresse</label>
+                <label className="block text-sm font-bold mb-2">العنوان</label>
                 <input
                   type="text"
                   name="address"
@@ -247,7 +247,7 @@ const CustomersPage = () => {
 
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Stadt</label>
+                  <label className="block text-sm font-bold mb-2">المدينة</label>
                   <input
                     type="text"
                     name="city"
@@ -258,7 +258,7 @@ const CustomersPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">PLZ</label>
+                  <label className="block text-sm font-bold mb-2">الرمز البريدي</label>
                   <input
                     type="text"
                     name="postal_code"
@@ -271,7 +271,7 @@ const CustomersPage = () => {
               </div>
 
               <div className="mt-4">
-                <label className="block text-sm font-bold mb-2">Notizen</label>
+                <label className="block text-sm font-bold mb-2">ملاحظات</label>
                 <textarea
                   name="notes"
                   value={formData.notes}
@@ -286,14 +286,14 @@ const CustomersPage = () => {
                   type="submit"
                   className="flex-1 btn-primary"
                 >
-                  Speichern
+                  حفظ
                 </button>
                 <button
                   type="button"
                   onClick={resetForm}
                   className="flex-1 btn-secondary"
                 >
-                  Abbrechen
+                  إلغاء
                 </button>
               </div>
             </form>

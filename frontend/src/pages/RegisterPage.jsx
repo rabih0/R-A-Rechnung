@@ -28,7 +28,7 @@ const RegisterPage = () => {
     e.preventDefault()
 
     if (formData.password !== formData.passwordConfirmation) {
-      toast.error('Passwörter stimmen nicht überein')
+      toast.error('كلمات المرور غير متطابقة')
       return
     }
 
@@ -40,10 +40,10 @@ const RegisterPage = () => {
     )
 
     if (success) {
-      toast.success('Erfolgreich registriert!')
+      toast.success('تم التسجيل بنجاح!')
       navigate('/')
     } else {
-      toast.error(error || 'Registrierung fehlgeschlagen')
+      toast.error(error || 'فشل التسجيل')
     }
   }
 
@@ -51,13 +51,13 @@ const RegisterPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800">
       <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Registrierung
+          تسجيل جديد
         </h1>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Name
+              الاسم
             </label>
             <input
               type="text"
@@ -65,14 +65,14 @@ const RegisterPage = () => {
               value={formData.name}
               onChange={handleChange}
               className="form-input"
-              placeholder="Ihr Name"
+              placeholder="الاسم الكامل"
               required
             />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              E-Mail
+              البريد الإلكتروني
             </label>
             <input
               type="email"
@@ -80,14 +80,14 @@ const RegisterPage = () => {
               value={formData.email}
               onChange={handleChange}
               className="form-input"
-              placeholder="beispiel@email.com"
+              placeholder="example@email.com"
               required
             />
           </div>
 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Passwort
+              كلمة المرور
             </label>
             <input
               type="password"
@@ -102,7 +102,7 @@ const RegisterPage = () => {
 
           <div className="mb-6">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Passwort bestätigen
+              تأكيد كلمة المرور
             </label>
             <input
               type="password"
@@ -126,14 +126,14 @@ const RegisterPage = () => {
             disabled={isLoading}
             className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {isLoading ? 'Wird registriert...' : 'Registrieren'}
+            {isLoading ? 'جاري التسجيل...' : 'تسجيل'}
           </button>
         </form>
 
         <p className="text-center text-gray-600 mt-4">
-          Bereits registriert?{' '}
+          لديك حساب بالفعل؟{' '}
           <Link to="/login" className="text-blue-600 hover:underline">
-            Anmelden
+            تسجيل الدخول
           </Link>
         </p>
       </div>

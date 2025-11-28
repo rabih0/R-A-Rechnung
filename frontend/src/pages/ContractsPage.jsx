@@ -32,7 +32,7 @@ const ContractsPage = () => {
       const response = await contractAPI.getAll({ per_page: 50 })
       setContracts(response.data.data)
     } catch (error) {
-      toast.error('Fehler beim Laden der Verträge')
+      toast.error('خطأ في تحميل العقود')
     } finally {
       setIsLoading(false)
     }
@@ -52,7 +52,7 @@ const ContractsPage = () => {
 
     try {
       await contractAPI.create(formData)
-      toast.success('Vertrag erstellt')
+      toast.success('تم إنشاء العقد')
       setShowModal(false)
       setFormData({
         customer_id: '',
@@ -68,18 +68,18 @@ const ContractsPage = () => {
       })
       fetchContracts()
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Fehler beim Erstellen')
+      toast.error(error.response?.data?.message || 'خطأ في الإنشاء')
     }
   }
 
   const handleDelete = async (id) => {
-    if (window.confirm('Möchten Sie diesen Vertrag wirklich löschen?')) {
+    if (window.confirm('هل أنت متأكد أنك تريد حذف هذا العقد؟')) {
       try {
         await contractAPI.delete(id)
-        toast.success('Vertrag gelöscht')
+        toast.success('تم حذف العقد')
         fetchContracts()
       } catch (error) {
-        toast.error('Fehler beim Löschen')
+        toast.error('خطأ في الحذف')
       }
     }
   }
@@ -105,7 +105,7 @@ const ContractsPage = () => {
 
   const calculatePrice = async () => {
     if (!formData.customer_id) {
-      toast.error('Bitte wählen Sie einen Kunden aus')
+      toast.error('يرجى اختيار عميل')
       return
     }
 
@@ -120,36 +120,36 @@ const ContractsPage = () => {
 
       setPriceCalculation(response.data)
     } catch (error) {
-      toast.error('Fehler bei Preisberechnung')
+      toast.error('خطأ في حساب السعر')
     }
   }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Verträge</h1>
+        <h1 className="text-3xl font-bold text-gray-800">العقود</h1>
         <button
           onClick={() => setShowModal(true)}
           className="btn-primary"
         >
-          + Neuer Vertrag
+          + عقد جديد
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-8">Wird geladen...</div>
+        <div className="text-center py-8">جاري التحميل...</div>
       ) : (
         <div className="card">
           <div className="table-container">
             <table className="table">
               <thead>
                 <tr>
-                  <th>Vertragsnummer</th>
-                  <th>Kunde</th>
-                  <th>Von - Nach</th>
-                  <th>Gesamtpreis</th>
-                  <th>Status</th>
-                  <th>Aktionen</th>
+                  <th>رقم العقد</th>
+                  <th>العميل</th>
+                  <th>من - إلى</th>
+                  <th>السعر الإجمالي</th>
+                  <th>الحالة</th>
+                  <th>الإجراءات</th>
                 </tr>
               </thead>
               <tbody>
@@ -161,12 +161,12 @@ const ContractsPage = () => {
                     <td>€{contract.total_price?.toFixed(2) || '0.00'}</td>
                     <td><span className={`badge px-2 py-1 text-xs font-semibold rounded ${getStatusBadgeClass(contract.status)}`}>{contract.status}</span></td>
                     <td>
-                      <button className="text-blue-600 hover:underline mr-4">Ansicht</button>
+                      <button className="text-blue-600 hover:underline mr-4">عرض</button>
                       <button
                         onClick={() => handleDelete(contract.id)}
                         className="text-red-600 hover:underline"
                       >
-                        Löschen
+                        حذف
                       </button>
                     </td>
                   </tr>
@@ -180,12 +180,12 @@ const ContractsPage = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto">
           <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl my-8">
-            <h2 className="text-2xl font-bold mb-6">Neuer Vertrag</h2>
+            <h2 className="text-2xl font-bold mb-6">عقد جديد</h2>
 
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Kunde</label>
+                  <label className="block text-sm font-bold mb-2">العميل</label>
                   <select
                     name="customer_id"
                     value={formData.customer_id}
@@ -193,7 +193,7 @@ const ContractsPage = () => {
                     className="form-select"
                     required
                   >
-                    <option value="">Wählen Sie einen Kunden</option>
+                    <option value="">اختر عميلاً</option>
                     {customers.map((customer) => (
                       <option key={customer.id} value={customer.id}>
                         {customer.first_name} {customer.last_name}
@@ -202,7 +202,7 @@ const ContractsPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Vertragsdatum</label>
+                  <label className="block text-sm font-bold mb-2">تاريخ العقد</label>
                   <input
                     type="date"
                     name="contract_date"
@@ -216,7 +216,7 @@ const ContractsPage = () => {
 
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Von Adresse</label>
+                  <label className="block text-sm font-bold mb-2">من العنوان</label>
                   <input
                     type="text"
                     name="from_address"
@@ -227,7 +227,7 @@ const ContractsPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Nach Adresse</label>
+                  <label className="block text-sm font-bold mb-2">إلى العنوان</label>
                   <input
                     type="text"
                     name="to_address"
@@ -241,7 +241,7 @@ const ContractsPage = () => {
 
               <div className="grid grid-cols-3 gap-4 mb-4">
                 <div>
-                  <label className="block text-sm font-bold mb-2">Entfernung (km)</label>
+                  <label className="block text-sm font-bold mb-2">المسافة (كم)</label>
                   <input
                     type="number"
                     name="distance_km"
@@ -254,7 +254,7 @@ const ContractsPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Von Etagen</label>
+                  <label className="block text-sm font-bold mb-2">من الطابق</label>
                   <input
                     type="number"
                     name="from_floors"
@@ -266,7 +266,7 @@ const ContractsPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold mb-2">Bis Etagen</label>
+                  <label className="block text-sm font-bold mb-2">إلى الطابق</label>
                   <input
                     type="number"
                     name="to_floors"
@@ -280,16 +280,16 @@ const ContractsPage = () => {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-bold mb-2">Preisebene</label>
+                <label className="block text-sm font-bold mb-2">مستوى السعر</label>
                 <select
                   name="price_level"
                   value={formData.price_level}
                   onChange={handleChange}
                   className="form-select"
                 >
-                  <option value="medium">Mittel</option>
-                  <option value="above">Über Mittel</option>
-                  <option value="high">Hoch</option>
+                  <option value="medium">متوسط</option>
+                  <option value="above">فوق المتوسط</option>
+                  <option value="high">عالي</option>
                 </select>
               </div>
 
@@ -298,19 +298,19 @@ const ContractsPage = () => {
                 onClick={calculatePrice}
                 className="mb-4 btn-secondary"
               >
-                Preis berechnen
+                حساب السعر
               </button>
 
               {priceCalculation && (
                 <div className="bg-blue-50 p-4 rounded mb-4">
-                  <h3 className="font-bold mb-2">Preisberechnung:</h3>
+                  <h3 className="font-bold mb-2">حساب السعر:</h3>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p>Grundpreis: €{priceCalculation.base_price?.toFixed(2)}</p>
-                    <p>Fahrtkosten: €{priceCalculation.distance_price?.toFixed(2)}</p>
-                    <p>Etagekosten: €{priceCalculation.floor_price?.toFixed(2)}</p>
-                    <p>Zwischensumme: €{priceCalculation.subtotal?.toFixed(2)}</p>
-                    <p>Steuern (19%): €{priceCalculation.tax?.toFixed(2)}</p>
-                    <p className="font-bold">Gesamtbetrag: €{priceCalculation.total?.toFixed(2)}</p>
+                    <p>السعر الأساسي: €{priceCalculation.base_price?.toFixed(2)}</p>
+                    <p>تكلفة المسافة: €{priceCalculation.distance_price?.toFixed(2)}</p>
+                    <p>تكلفة الطوابق: €{priceCalculation.floor_price?.toFixed(2)}</p>
+                    <p>المجموع الفرعي: €{priceCalculation.subtotal?.toFixed(2)}</p>
+                    <p>الضرائب (19%): €{priceCalculation.tax?.toFixed(2)}</p>
+                    <p className="font-bold">المبلغ الإجمالي: €{priceCalculation.total?.toFixed(2)}</p>
                   </div>
                 </div>
               )}
@@ -320,14 +320,14 @@ const ContractsPage = () => {
                   type="submit"
                   className="flex-1 btn-primary"
                 >
-                  Vertrag erstellen
+                  إنشاء العقد
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
                   className="flex-1 btn-secondary"
                 >
-                  Abbrechen
+                  إلغاء
                 </button>
               </div>
             </form>

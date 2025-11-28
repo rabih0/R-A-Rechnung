@@ -24,7 +24,7 @@ const Dashboard = () => {
       const response = await settingsAPI.getDashboardStats()
       setStats(response.data)
     } catch (error) {
-      toast.error('Fehler beim Laden der Statistiken')
+      toast.error('خطأ في تحميل الإحصائيات')
       console.error('Error fetching stats:', error)
     } finally {
       setIsLoading(false)
@@ -36,7 +36,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="text-xl text-gray-600">Wird geladen...</div>
+        <div className="text-xl text-gray-600">جاري التحميل...</div>
       </div>
     )
   }
@@ -44,71 +44,71 @@ const Dashboard = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-8 text-gray-800">
-        Dashboard
+        لوحة التحكم
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <StatCard
-          label="Gesamtkunden"
+          label="إجمالي العملاء"
           value={stats.total_customers}
           icon="👥"
         />
         <StatCard
-          label="Verträge"
+          label="العقود"
           value={stats.total_contracts}
           icon="📄"
         />
         <StatCard
-          label="Rechnungen"
+          label="الفواتير"
           value={stats.total_invoices}
           icon="💰"
         />
         <StatCard
-          label="Ausstehende Rechnungen"
+          label="الفواتير المعلقة"
           value={stats.pending_invoices}
           icon="⏰"
           trend="up"
-          trendText="Zu beachten"
+          trendText="للمتابعة"
         />
         <StatCard
-          label="Kommende Termine"
+          label="المواعيد القادمة"
           value={stats.upcoming_appointments}
           icon="📅"
         />
         <StatCard
-          label="Abgeschlossene Verträge"
+          label="العقود المكتملة"
           value={stats.completed_contracts}
           icon="✅"
           trend="up"
-          trendText="Gut"
+          trendText="جيد"
         />
       </div>
 
       <div className="card">
         <h2 className="text-2xl font-bold mb-2 text-gray-800">
-          Willkommen im Umzugsmanagement System 👋
+          مرحباً بك في نظام إدارة النقل 👋
         </h2>
         <p className="text-gray-600 mb-6">
-          Verwalten Sie Ihre Umzüge, Kunden, Verträge und Rechnungen effizient
-          mit diesem integrierten System.
+          قم بإدارة عمليات النقل والعملاء والعقود والفواتير بكفاءة
+          مع هذا النظام المتكامل.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
-            <h3 className="font-semibold text-blue-900 mb-2">🎯 Schnelle Navigation</h3>
+            <h3 className="font-semibold text-blue-900 mb-2">🎯 تنقل سريع</h3>
             <p className="text-sm text-blue-700">
-              Nutzen Sie das Seitenmenü zum Zugriff auf alle wichtigen Module und Funktionen.
+              استخدم القائمة الجانبية للوصول إلى جميع الوحدات والوظائف المهمة.
             </p>
           </div>
           <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
-            <h3 className="font-semibold text-green-900 mb-2">⚙️ Einstellungen</h3>
+            <h3 className="font-semibold text-green-900 mb-2">⚙️ الإعدادات</h3>
             <p className="text-sm text-green-700">
-              Passen Sie Preise, Gebühren und Unternehmensdetails flexibel an.
+              قم بتخصيص الأسعار والرسوم وتفاصيل الشركة بمرونة.
             </p>
           </div>
           <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
-            <h3 className="font-semibold text-purple-900 mb-2">📊 Echtzeitdaten</h3>
+            <h3 className="font-semibold text-purple-900 mb-2">📊 بيانات فورية</h3>
             <p className="text-sm text-purple-700">
-              Alle Informationen werden live aktualisiert und sind jederzeit verfügbar.
+              يتم تحديث جميع المعلومات بشكل مباشر ومتاحة في أي وقت.
             </p>
           </div>
         </div>

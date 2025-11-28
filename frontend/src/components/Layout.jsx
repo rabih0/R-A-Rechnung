@@ -11,12 +11,12 @@ const Layout = ({ children }) => {
   const location = useLocation()
 
   const menuItems = [
-    { label: 'Dashboard', path: '/', icon: '📊' },
-    { label: 'Kunden', path: '/customers', icon: '👥' },
-    { label: 'Verträge', path: '/contracts', icon: '📄' },
-    { label: 'Rechnungen', path: '/invoices', icon: '💰' },
-    { label: 'Termine', path: '/appointments', icon: '📅' },
-    { label: 'Einstellungen', path: '/settings', icon: '⚙️' },
+    { label: 'لوحة التحكم', path: '/', icon: '📊' },
+    { label: 'العملاء', path: '/customers', icon: '👥' },
+    { label: 'العقود', path: '/contracts', icon: '📄' },
+    { label: 'الفواتير', path: '/invoices', icon: '💰' },
+    { label: 'المواعيد', path: '/appointments', icon: '📅' },
+    { label: 'الإعدادات', path: '/settings', icon: '⚙️' },
   ]
 
   const isActive = (path) => location.pathname === path
@@ -26,18 +26,17 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100" dir="rtl">
       <aside
-        className={`${
-          sidebarOpen ? 'w-64' : 'w-20'
-        } bg-gradient-to-b from-gray-900 to-gray-800 text-white transition-all duration-300 overflow-y-auto shadow-lg`}
+        className={`${sidebarOpen ? 'w-64' : 'w-20'
+          } bg-gradient-to-b from-gray-900 to-gray-800 text-white transition-all duration-300 overflow-y-auto shadow-lg`}
       >
         <div className="p-4 flex items-center justify-between border-b border-gray-700">
           <div className={`flex items-center gap-3 ${!sidebarOpen && 'hidden'}`}>
             <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center font-bold">
-              U
+              ن
             </div>
-            <h1 className="font-bold text-lg">Umzugs</h1>
+            <h1 className="font-bold text-lg">نقل</h1>
           </div>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -53,15 +52,14 @@ const Layout = ({ children }) => {
               key={item.path}
               to={item.path}
               onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center px-4 py-3 transition duration-200 ${
-                isActive(item.path)
-                  ? 'bg-blue-600 border-l-4 border-blue-300 text-white'
+              className={`flex items-center px-4 py-3 transition duration-200 ${isActive(item.path)
+                  ? 'bg-blue-600 border-r-4 border-blue-300 text-white'
                   : 'hover:bg-gray-700 text-gray-300 hover:text-white'
-              }`}
+                }`}
             >
               <span className="text-xl flex-shrink-0">{item.icon}</span>
               {sidebarOpen && (
-                <span className="ml-3 text-sm font-medium">{item.label}</span>
+                <span className="mr-3 text-sm font-medium">{item.label}</span>
               )}
             </Link>
           ))}
@@ -69,7 +67,7 @@ const Layout = ({ children }) => {
 
         <div className={`absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700 bg-gray-900 ${!sidebarOpen && 'p-2'}`}>
           <div className={`text-xs text-gray-400 ${!sidebarOpen && 'hidden'}`}>
-            Version 1.0.0
+            الإصدار 1.0.0
           </div>
         </div>
       </aside>
@@ -86,7 +84,7 @@ const Layout = ({ children }) => {
               </button>
             </div>
             <h2 className="hidden md:block text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              Umzugsmanagement
+              نظام إدارة النقل
             </h2>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -103,7 +101,7 @@ const Layout = ({ children }) => {
                 className="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition text-sm font-medium"
               >
                 <FiLogOut size={16} />
-                <span className="hidden sm:inline">Abmelden</span>
+                <span className="hidden sm:inline">تسجيل الخروج</span>
               </button>
             </div>
           </div>
@@ -118,7 +116,7 @@ const Layout = ({ children }) => {
 
       {mobileMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden z-30">
-          <div className="absolute left-0 top-0 bottom-0 w-64 bg-gray-900 text-white overflow-y-auto">
+          <div className="absolute right-0 top-0 bottom-0 w-64 bg-gray-900 text-white overflow-y-auto">
             <div className="p-4">
               <button onClick={() => setMobileMenuOpen(false)}>
                 <FiX size={24} />
@@ -130,14 +128,13 @@ const Layout = ({ children }) => {
                   key={item.path}
                   to={item.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center px-4 py-3 rounded transition ${
-                    isActive(item.path)
+                  className={`flex items-center px-4 py-3 rounded transition ${isActive(item.path)
                       ? 'bg-blue-600 text-white'
                       : 'hover:bg-gray-800 text-gray-300'
-                  }`}
+                    }`}
                 >
                   <span className="text-xl">{item.icon}</span>
-                  <span className="ml-3">{item.label}</span>
+                  <span className="mr-3">{item.label}</span>
                 </Link>
               ))}
             </nav>
